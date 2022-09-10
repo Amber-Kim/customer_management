@@ -21,34 +21,28 @@ const styles = theme =>({
   }
 })
 
-const customers = [
-  {
-  'id': 1,
-  'image': 'https://placeimg.com/64/64/1',
-  'name': 'amber',
-  'birthday': '951120',
-  'gender': 'Female',
-  'job': 'developer'
-  },
-  {
-  'id': 2,
-  'image': 'https://placeimg.com/64/64/2',
-  'name': 'elthon',
-  'birthday': '860406',
-  'gender': 'male',
-  'job': 'gamer'
-  },
-  {
-  'id': 3,
-  'image': 'https://placeimg.com/64/64/3',
-  'name': 'shawn',
-  'birthday': '930621',
-  'gender': 'male',
-  'job': 'mid developer'
-  },
-]
-
 class App extends Component {
+ // can be changed == useState
+  state = {
+    customers: ""
+  }
+
+ // API 서버에 접근을 해서 데이터를 받아오는 작업
+ // 생명주기 있음
+  componentDidMount() {
+    this.callApi()
+    // callApi에서 받아온 데이터를 res에 넣음
+    // customers: res를 통해 state라는 변수 값에 넣음
+      .then(res => this.setState({ customers: res })) 
+  }
+
+ // 접속해서 데이터를 받아오고자 하는 API 주소를 넣음
+  callApi = async() => {
+    const response = await fetch('/api/customers') 
+    const body = await response.json(); // 데이터를 body 라는 변수에 넣음
+    return body;
+  }
+
   render() {
     return (
       <Paper>
@@ -64,8 +58,8 @@ class App extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers.map(c => { return ( <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}
-          /> )})}
+            {this.state.customers ? this.state.customers.map(c => { return ( <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}
+          /> )}) : "" }
           </TableBody>
         </Table>
       </Paper>
