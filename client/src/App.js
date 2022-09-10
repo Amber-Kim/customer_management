@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import Customer from './components/Customer';
+import CustomerAdd from './components/CustomerAdd';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -27,9 +28,24 @@ const styles = theme =>({
 
 class App extends Component {
  // can be changed == useState
-  state = {
-    customers: "",
-    completed: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      customer: '',
+      completed:0
+    }
+  }
+
+  stateRefresh = () => {
+    this.setState({
+      customer: '',
+      completed: 0
+    })
+    this.callApi()
+    // callApi에서 받아온 데이터를 res에 넣음
+    // customers: res를 통해 state라는 변수 값에 넣음
+      .then(res => this.setState({ customers: res }))
+      .catch(err => console.log(err));
   }
 
  // API 서버에 접근을 해서 데이터를 받아오는 작업
@@ -57,29 +73,32 @@ class App extends Component {
 
   render() {
     return (
-      <Paper>
-        <Table>
-          <TableHead>
+      <div>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>No.</TableCell>
+                <TableCell>Image</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>DOB</TableCell>
+                <TableCell>Gender</TableCell>
+                <TableCell>Position</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.customers ? this.state.customers.map(c => { return ( <Customer key={c.id} id={c.id} image={c.image} name={c.NAME} birthday={c.birthday} gender={c.gender} job={c.job}
+            /> )}) : 
             <TableRow>
-              <TableCell>No.</TableCell>
-              <TableCell>Image</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>DOB</TableCell>
-              <TableCell>Gender</TableCell>
-              <TableCell>Position</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.customers ? this.state.customers.map(c => { return ( <Customer key={c.id} id={c.id} image={c.image} name={c.NAME} birthday={c.birthday} gender={c.gender} job={c.job}
-          /> )}) : 
-          <TableRow>
-            <TableCell colSpan="6" align="center">
-              <CircularProgress value={this.state.complated} />
-            </TableCell>
-          </TableRow> }
-          </TableBody>
-        </Table>
-      </Paper>
+              <TableCell colSpan="6" align="center">
+                <CircularProgress value={this.state.complated} />
+              </TableCell>
+            </TableRow> }
+            </TableBody>
+          </Table>
+        </Paper>
+        <CustomerAdd stateRefresh={this.stateRefresh} />
+      </div>
     );
   }
 }
