@@ -10,21 +10,84 @@ import TableBody from '@material-ui/core/TableBody';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { alpha } from '@mui/material/styles';
 
 const styles = theme =>({
   root: {
-    width : '100%',
-    marginTop: theme.spacing(3),
-    overflowX: "auto"
-    
+    width: '100%',
+    minWidth: 1080
   },
-  table:{
-    minWidth:1080
+  menu: {
+    marginTop: 15,
+    marginBottom: 15,
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  paper: {
+    marginLeft: 18,
+    marginRight: 18
   },
   progress: {
     margin: theme.spacing(2)
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  tableHead: {
+    fontSize: '1.0rem'
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  title: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing.unit,
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    width: theme.spacing(9),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+    width: '100%',
+  },
+  inputInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing(10),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 120,
+      '&:focus': {
+        width: 200,
+      },
+    },
   }
-})
+});
 
 class App extends Component {
  // can be changed == useState
@@ -72,19 +135,26 @@ class App extends Component {
   }
 
   render() {
+    const cellList = ["No.", "Profile img", "Name", "DOB", "Gender", "Position", "Setting"];
+    const { classes } = this.props;
+
     return (
-      <div>
-        <Paper>
+      <div className={classes.root}>
+        <div className="App-header">
+          <div className="title">
+            Customer Management System
+          </div>
+        </div>
+        <div className={classes.menu}>
+          <CustomerAdd stateRefresh={this.stateRefresh} />
+        </div>
+        <Paper className={classes.paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>No.</TableCell>
-                <TableCell>Image</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>DOB</TableCell>
-                <TableCell>Gender</TableCell>
-                <TableCell>Position</TableCell>
-                <TableCell>Setting</TableCell>
+                {cellList.map(c => {
+                  return <TableCell className={classes.tableHead}>{c}</TableCell>
+                })}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -98,7 +168,6 @@ class App extends Component {
             </TableBody>
           </Table>
         </Paper>
-        <CustomerAdd stateRefresh={this.stateRefresh} />
       </div>
     );
   }
