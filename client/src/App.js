@@ -63,14 +63,14 @@ class App extends Component {
             <TableRow>
               <TableCell>No.</TableCell>
               <TableCell>Image</TableCell>
-              <TableCell>NAME</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell>DOB</TableCell>
               <TableCell>Gender</TableCell>
               <TableCell>Position</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.customers ? this.state.customers.map(c => { return ( <Customer key={c.id} id={c.id} image={c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}
+            {this.state.customers ? this.state.customers.map(c => { return ( <Customer key={c.id} id={c.id} image={c.image} name={c.NAME} birthday={c.birthday} gender={c.gender} job={c.job}
           /> )}) : 
           <TableRow>
             <TableCell colSpan="6" align="center">
