@@ -86,9 +86,11 @@ class App extends Component {
  * Free with free tier => https://aws.amazon.com/console/
 
 
+
 ### 8. Build Customer DB table using HeidiSQL and link with Express
  * npm install --save mysql: For interworking between Node.js and MySQL
  * Available for free => https://www.heidisql.com/
+ https://user-images.githubusercontent.com/95224457/189552399-00b67a9e-e8b1-4f09-b1cb-daad17e0523e.png
 
 
 ### 9. Customer Add Form & Events Handling
