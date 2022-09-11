@@ -1,7 +1,7 @@
 # Customer Relations Management Project
 
 ## Preview
-
+https://user-images.githubusercontent.com/95224457/189506576-397da4c6-2b3b-429c-8be0-49b4f26c20fd.gif
 
 ## Development Order
 
