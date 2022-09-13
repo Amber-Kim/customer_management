@@ -151,17 +151,24 @@ class App extends Component {
         <Paper className={classes.paper}>
           <Table>
             <TableHead>
-              <TableRow>
-                {cellList.map(c => {
+              <TableRow colSpan="6">
+                <TableCell className={classes.tableHead}>No.</TableCell>
+                <TableCell className={classes.tableHead}>Profile img.</TableCell>
+                <TableCell className={classes.tableHead}>Name</TableCell>
+                <TableCell className={classes.tableHead}>DOB</TableCell>
+                <TableCell className={classes.tableHead}>Gender</TableCell>
+                <TableCell className={classes.tableHead}>Position</TableCell>
+                <TableCell colSpan="6" align="center" className={classes.tableHead}>Setting</TableCell>
+                {/* {cellList.map(c => {
                   return <TableCell className={classes.tableHead}>{c}</TableCell>
-                })}
+                })} */}
               </TableRow>
             </TableHead>
             <TableBody>
               {this.state.customers ? this.state.customers.map(c => { return ( <Customer stateRefresh={this.stateRefresh} key={c.id} id={c.id} image={c.image} name={c.NAME} birthday={c.birthday} gender={c.gender} job={c.job}
             /> )}) : 
             <TableRow>
-              <TableCell colSpan="6" align="center">
+              <TableCell colSpan="7" align="center">
                 <CircularProgress value={this.state.complated} />
               </TableCell>
             </TableRow> }
