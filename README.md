@@ -42,11 +42,11 @@ module.exports = function(app) {
 ```
 
 
- -- body-parcer: Middleware of Node.js
- -- express: Fast, unopinionated, minimalist web framework
- -- nodemon: Simple monitor script for use during development of a Node.js app
- -- concurrently: Run command client & server concurrently
- -- http-proxy-middleware: The one-liner node.js proxy middleware for connect, express and browser-sync
+ - body-parcer: Middleware of Node.js
+ - express: Fast, unopinionated, minimalist web framework
+ - nodemon: Simple monitor script for use during development of a Node.js app
+ - concurrently: Run command client & server concurrently
+ - http-proxy-middleware: The one-liner node.js proxy middleware for connect, express and browser-sync
 
 
 ### 5. Implement REST API in Node.js Express
